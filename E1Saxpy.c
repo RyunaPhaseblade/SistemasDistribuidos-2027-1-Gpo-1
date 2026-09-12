@@ -29,6 +29,9 @@ int main(int argc, char* argv[]) {
     }
 
     // Llenar valores de matrices
+
+    get_walltime(&S1);
+
     for (i = 0; i < n; ++i) {
         for (j = 0; j < n; ++j) {
             matrizA[i][j] = rand() % 6;
@@ -36,6 +39,10 @@ int main(int argc, char* argv[]) {
             matrizC[i][j] = 0;
         }
     }
+
+    get_walltime(&E1);
+
+    printf("Tiempo de llenado de las matrices: %f s \n", (E1-S1));
 
     get_walltime(&S1);
 
@@ -121,6 +128,7 @@ int main(int argc, char* argv[]) {
 	/*Usadas para verificar el proceso
 	printf("Matriz A\n");
     for(i=0; i<n; i++){
+    
 	for(j=0; j<n; j++){
 		printf("%d\t",matrizA[i][j]);
 	}
