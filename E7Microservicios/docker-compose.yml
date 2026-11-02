@@ -1,0 +1,20 @@
+services:
+  usuarios:
+    build: .
+    command: python usuarios.py
+  catalogo:
+    build: .
+    command: python catalogo.py
+  pedidos:
+    build: .
+    command: python pedidos.py
+  gateway:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - usuarios
+      - catalogo
+      - pedidos
