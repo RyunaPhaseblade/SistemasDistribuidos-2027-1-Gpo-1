@@ -11,14 +11,16 @@ def crear():
     if u.status_code != 200:
         return jsonify(error="Usuario no valido"), 400
     
-    p = requests.get(f"http://catalogo:5000/productos/{datos['producto']}", timeout=2)
+    try:
+        p = requests.get(f"http://catalogo:5000/productos/{datos['producto']}", timeout=2)
+    except requests.exceptions.RequestException:
+        return jsonify(error="Catalogo no disponible"), 503
+        
     if p.status_code != 200:
         return jsonify(error="Producto no valido"), 400
-    
-    cliente = u.json()
+        
     producto = p.json()
-    
-    return jsonify(cliente=cliente["nombre"],
+    return jsonify(cliente=u.json()["nombre"],
                    producto=producto["nombre"],
                    cantidad=datos["cantidad"],
                    total=producto["precio"] * datos["cantidad"]), 201
