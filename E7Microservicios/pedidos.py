@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.post("/pedidos")
 def crear():
-    datos = request.request.get_json()
+    datos = request.get_json()
     # Los demás servicios se localizan por su nombre en la red de Docker
     u = requests.get(f"http://usuarios:5000/usuarios/{datos['usuario']}", timeout=2)
     if u.status_code != 200:

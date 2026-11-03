@@ -4,7 +4,7 @@ from collections import Counter
 
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 20
 
-def pedir():
+def pedir(i):
     with urllib.request.urlopen("http://gateway/productos/1") as r:
         return json.load(r)["replica"]
 
